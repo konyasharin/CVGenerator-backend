@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class AlreadyExistsException extends HttpException {
-  constructor(message: string) {
+  constructor(message: string, error?: string) {
     super(
       {
         message: [message],
-        error: 'Conflict',
+        error: error ?? 'ALREADY_EXISTS',
         statusCode: HttpStatus.CONFLICT,
       },
       HttpStatus.CONFLICT,

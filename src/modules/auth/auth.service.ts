@@ -12,9 +12,7 @@ export class AuthService {
       user.email,
     );
     if (userWithSameEmail)
-      throw new AlreadyExistsException(
-        'Пользователь с таким email уже существует',
-      );
+      throw new AlreadyExistsException('User with this email already exists');
 
     return await this.authRepository.createUser(user);
   }

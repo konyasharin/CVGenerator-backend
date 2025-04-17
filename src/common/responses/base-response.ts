@@ -4,7 +4,7 @@ import { BaseError } from './base-error';
 
 export const BaseResponse = <
   TDataModel extends Type,
-  TErrorModel extends Type<BaseError>,
+  TErrorModel extends ReturnType<typeof BaseError>,
 >(
   dataModel: TDataModel,
   errorModel?: TErrorModel,
@@ -13,7 +13,7 @@ export const BaseResponse = <
     @ApiProperty({ type: dataModel, nullable: true })
     data: InstanceType<TDataModel>;
 
-    @ApiProperty({ type: errorModel ?? BaseError, nullable: true })
+    @ApiProperty({ type: errorModel ?? BaseError(), nullable: true })
     error: InstanceType<TErrorModel>;
   }
 

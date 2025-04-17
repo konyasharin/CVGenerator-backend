@@ -1,8 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { HttpStatus, Logger, ValidationPipe } from '@nestjs/common';
 import 'dotenv/config';
+import { BaseException } from '@common/exceptions';
+import { HttpExceptionFilter } from '@modules/app';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
@@ -12,7 +14,14 @@ async function bootstrap() {
   const swaggerPrefix = process.env.SWAGGER_PREFIX ?? 'swagger';
   const port = process.env.PORT ?? 3000;
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      exceptionFactory: () => {
+        return new BaseException('Validation error', HttpStatus.BAD_REQUEST);
+      },
+    }),
+  );
   app.setGlobalPrefix(apiPrefix);
 
   const config = new DocumentBuilder()

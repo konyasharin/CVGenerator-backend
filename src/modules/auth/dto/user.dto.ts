@@ -1,12 +1,16 @@
 import { IsEmail, IsNumber, IsString } from 'class-validator';
 import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { BaseError, BaseResponse } from '@common/responses';
+import { UserError } from '../enums/user-error.enum';
 
 export class UserDto {
   @ApiProperty()
   @IsNumber()
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    example: 'example@mail.ru',
+  })
   @IsEmail()
   email: string;
 
@@ -14,6 +18,9 @@ export class UserDto {
   @IsString()
   password: string;
 }
-export class CreateUserDto extends OmitType(UserDto, ['id']) {}
 
 export class ReturnUserDto extends OmitType(UserDto, ['password']) {}
+
+export class CreateUserDto extends OmitType(UserDto, ['id']) {
+  public static Response = BaseResponse(ReturnUserDto, BaseError(UserError));
+}
