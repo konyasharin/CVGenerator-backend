@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@modules/app';
+import { Injectable } from '@nestjs/common';
+
 import { CreateUserDto } from './auth.dto';
 
 @Injectable()

@@ -1,6 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { mixin } from '@nestjs/common';
 import { ExceptionType } from '@common/exceptions';
+import { mixin } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 
 export type BaseErrorAsType = InstanceType<ReturnType<typeof BaseError>>;
 

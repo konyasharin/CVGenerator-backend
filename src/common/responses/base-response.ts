@@ -1,5 +1,6 @@
 import { mixin, Type } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
+
 import { BaseError } from './base-error';
 
 export const BaseResponse = <

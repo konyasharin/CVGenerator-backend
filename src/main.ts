@@ -1,10 +1,12 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { HttpStatus, Logger, ValidationPipe } from '@nestjs/common';
-import 'dotenv/config';
 import { BaseException } from '@common/exceptions';
 import { HttpExceptionFilter } from '@modules/app';
+import { HttpStatus, Logger, ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import 'dotenv/config';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');

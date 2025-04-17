@@ -1,8 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { AuthRepository } from './auth.repository';
-import { CreateUserDto, LoginDto } from './auth.dto';
 import { AlreadyExistsException } from '@common/exceptions';
 import { Crypto } from '@common/utils';
+import { BadRequestException, Injectable } from '@nestjs/common';
+
+import { CreateUserDto, LoginDto } from './auth.dto';
+import { AuthRepository } from './auth.repository';
 
 @Injectable()
 export class AuthService {

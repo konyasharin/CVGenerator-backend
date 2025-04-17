@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { ExceptionBuilder } from '@common/exceptions/exception-builder';
-import { ExceptionType } from '@common/exceptions/exception-type';
+
+import { ExceptionBuilder } from './exception-builder';
+import { ExceptionType } from './exception-type';
 
 export class InvalidDataException extends HttpException {
   constructor(message: string, type?: string) {

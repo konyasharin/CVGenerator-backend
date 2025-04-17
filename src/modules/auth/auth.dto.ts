@@ -1,7 +1,7 @@
-import { IsEmail, IsJWT, IsNumber, IsString, MinLength } from 'class-validator';
-import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { BaseError, BaseResponse } from '@common/responses';
 import { ExceptionType } from '@common/exceptions';
+import { BaseError, BaseResponse } from '@common/responses';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
+import { IsEmail, IsJWT, IsNumber, IsString, MinLength } from 'class-validator';
 
 export class UserDto {
   @ApiProperty()
