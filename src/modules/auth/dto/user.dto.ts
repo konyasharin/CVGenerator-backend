@@ -1,4 +1,4 @@
-import { IsEmail, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsString, MinLength } from 'class-validator';
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { BaseError, BaseResponse } from '@common/responses';
 import { UserError } from '../enums/user-error.enum';
@@ -16,6 +16,7 @@ export class UserDto {
 
   @ApiProperty()
   @IsString()
+  @MinLength(6)
   password: string;
 }
 

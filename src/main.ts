@@ -17,8 +17,17 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({
-      exceptionFactory: () => {
-        return new BaseException('Validation error', HttpStatus.BAD_REQUEST);
+      exceptionFactory: (errors) => {
+        return new BaseException(
+          errors.length
+            ? errors.reduce((acc, error) => {
+                if (error.constraints)
+                  return [...acc, ...Object.values(error.constraints)];
+                return acc;
+              }, [])
+            : 'Validation error',
+          HttpStatus.BAD_REQUEST,
+        );
       },
     }),
   );
