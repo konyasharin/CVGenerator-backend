@@ -1,17 +1,19 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
+import { ExceptionBuilder } from './exception-builder';
+import { ExceptionType } from '@common/exceptions';
 
 export class BaseException extends HttpException {
   constructor(
     message: string[] | string,
-    code: number = HttpStatus.INTERNAL_SERVER_ERROR,
+    statusCode: number = HttpStatus.INTERNAL_SERVER_ERROR,
   ) {
     super(
-      {
-        message: Array.isArray(message) ? message : [message],
-        error: 'BASE_EXCEPTION',
-        statusCode: code,
-      },
-      code,
+      ExceptionBuilder.BuildResponse({
+        message,
+        statusCode,
+        type: ExceptionType.BASE,
+      }),
+      statusCode,
     );
   }
 }

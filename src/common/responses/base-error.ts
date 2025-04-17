@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { mixin } from '@nestjs/common';
+import { ExceptionType } from '@common/exceptions';
 
-export const BASE_ERROR_VALUE = 'BASE_ERROR';
+export type BaseErrorAsType = InstanceType<ReturnType<typeof BaseError>>;
 
-export const BaseError = (errorType: Record<string, string> = {}) => {
+export const BaseError = (errorType: string[] = []) => {
   class BaseErrorModel {
     @ApiProperty({
       example: ['Something went wrong'],
@@ -11,10 +12,10 @@ export const BaseError = (errorType: Record<string, string> = {}) => {
     message: string[];
 
     @ApiProperty({
-      example: BASE_ERROR_VALUE,
-      enum: [...Object.values(errorType), BASE_ERROR_VALUE],
+      example: ExceptionType.BASE,
+      enum: [...errorType, ExceptionType.BASE],
     })
-    error: string;
+    type: string;
 
     @ApiProperty({
       example: 400,

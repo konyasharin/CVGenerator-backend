@@ -3,28 +3,32 @@ import {
   Catch,
   ExceptionFilter,
   HttpStatus,
+  Logger,
 } from '@nestjs/common';
 
 import { Response } from 'express';
-import { BASE_ERROR_VALUE } from '@common/responses';
+import { BaseErrorAsType } from '@common/responses';
+import { ExceptionType } from '@common/exceptions';
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
+    const logger = new Logger('ExceptionFilter');
 
     const status = HttpStatus.INTERNAL_SERVER_ERROR;
-    const errorResponse = {
+    const errorResponse: BaseErrorAsType = {
       message: ['Something went wrong'],
       statusCode: status,
-      error: BASE_ERROR_VALUE,
+      type: ExceptionType.BASE,
     };
 
     if (exception instanceof Error && 'response' in exception) {
       Object.assign(errorResponse, exception.response);
     }
 
+    logger.error(exception);
     response.status(status).json(errorResponse);
   }
 }
