@@ -1,6 +1,6 @@
 import { BaseErrorAsType } from '@common/responses';
 import { HttpStatus } from '@nestjs/common';
-import { ExceptionType } from './exception-type.enum';
+import { ExceptionType } from './exception-type';
 
 type BuildErrorParam = Omit<BaseErrorAsType, 'message'> & {
   message: string | string[];

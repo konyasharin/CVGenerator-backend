@@ -42,6 +42,6 @@ export class CreateUserDto extends OmitType(UserDto, ['id']) {
 export class LoginDto extends OmitType(UserDto, ['id']) {
   public static readonly Response = BaseResponse(
     JwtDto,
-
+    BaseError([ExceptionType.INVALID]),
   );
 }
