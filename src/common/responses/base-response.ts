@@ -2,14 +2,14 @@ import { mixin, Type } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseError } from './base-error';
 
-export const createBaseResponse = <
+export const BaseResponse = <
   TDataModel extends Type,
   TErrorModel extends Type<BaseError>,
 >(
   dataModel: TDataModel,
   errorModel?: TErrorModel,
 ) => {
-  class BaseResponse {
+  class BaseResponseModel {
     @ApiProperty({ type: dataModel, nullable: true })
     data: InstanceType<TDataModel>;
 
@@ -17,5 +17,5 @@ export const createBaseResponse = <
     error: InstanceType<TErrorModel>;
   }
 
-  return mixin(BaseResponse);
+  return mixin(BaseResponseModel);
 };

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AuthRepository } from './auth.repository';
 import { CreateUserDto } from './dto/user.dto';
-import { AlreadyExistsException } from '../common/exceptions/AlreadyExistsException';
+import { AlreadyExistsException } from '@common/exceptions';
 
 @Injectable()
 export class AuthService {

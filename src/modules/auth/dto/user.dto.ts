@@ -1,6 +1,5 @@
 import { IsEmail, IsNumber, IsString } from 'class-validator';
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { createBaseResponse } from '../../common/responses/base-response';
 
 export class UserDto {
   @ApiProperty()
@@ -17,6 +16,4 @@ export class UserDto {
 }
 export class CreateUserDto extends OmitType(UserDto, ['id']) {}
 
-export class ReturnUserDto extends createBaseResponse(
-  OmitType(UserDto, ['password']),
-) {}
+export class ReturnUserDto extends OmitType(UserDto, ['password']) {}
