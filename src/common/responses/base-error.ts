@@ -1,11 +1,10 @@
 import { ExceptionType } from '@common/exceptions';
-import { mixin } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 
 export type BaseErrorAsType = InstanceType<ReturnType<typeof BaseError>>;
 
 export const BaseError = (errorType: string[] = []) => {
-  class BaseErrorModel {
+  class BaseErrorDto {
     @ApiProperty({
       example: ['Something went wrong'],
     })
@@ -23,5 +22,5 @@ export const BaseError = (errorType: string[] = []) => {
     statusCode: number;
   }
 
-  return mixin(BaseErrorModel);
+  return BaseErrorDto;
 };
