@@ -17,14 +17,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const logger = new Logger('ExceptionFilter');
 
     const status = HttpStatus.INTERNAL_SERVER_ERROR;
-    const errorResponse: BaseErrorAsType = {
-      message: ['Something went wrong'],
-      statusCode: status,
-      type: ExceptionType.BASE,
+    const errorResponse: { error: BaseErrorAsType } = {
+      error: {
+        message: ['Something went wrong'],
+        statusCode: status,
+        type: ExceptionType.BASE,
+      },
     };
 
     if (exception instanceof Error && 'response' in exception) {
-      Object.assign(errorResponse, exception.response);
+      Object.assign(errorResponse.error, exception.response);
     }
 
     logger.error(exception);

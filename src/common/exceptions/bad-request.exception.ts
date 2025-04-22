@@ -4,15 +4,15 @@ import { ExceptionBuilder } from './exception-builder';
 import { ExceptionType } from './exception-type';
 import { ExceptionConstructParams } from './types';
 
-export class AlreadyExistsException extends HttpException {
+export class BadRequestException extends HttpException {
   constructor(params: ExceptionConstructParams) {
     super(
       ExceptionBuilder.BuildResponse({
-        message: params.message ?? 'Already Exists',
-        type: params.type ?? ExceptionType.ALREADY_EXISTS,
-        statusCode: HttpStatus.CONFLICT,
+        message: params.message ?? 'Bad Request',
+        type: params.type ?? ExceptionType.BAD_REQUEST,
+        statusCode: HttpStatus.BAD_REQUEST,
       }),
-      HttpStatus.CONFLICT,
+      HttpStatus.BAD_REQUEST,
     );
   }
 }

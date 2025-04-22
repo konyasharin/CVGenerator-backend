@@ -1,5 +1,6 @@
 export const ExceptionType = {
   BASE: 'BASE',
   ALREADY_EXISTS: 'ALREADY_EXISTS',
-  INVALID: 'INVALID',
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  BAD_REQUEST: 'BAD_REQUEST',
 } as const;

@@ -1,4 +1,5 @@
 import { Response } from '@common/responses';
+import { TokenDto } from '@modules/token';
 import { Body, Controller, Post } from '@nestjs/common';
 
 import { CreateUserDto, LoginDto, ReturnUserDto } from './auth.dto';
@@ -16,7 +17,7 @@ export class AuthController {
 
   @Post('/login')
   @Response(LoginDto.Response)
-  public async login(@Body() loginInfo: LoginDto) {
+  public async login(@Body() loginInfo: LoginDto): Promise<TokenDto> {
     return await this.authService.login(loginInfo);
   }
 }

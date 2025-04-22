@@ -14,14 +14,6 @@ export class AuthRepository {
   public async getUserByEmail(email: string) {
     return this.prisma.user.findUnique({
       where: { email },
-      omit: { password: true },
-    });
-  }
-
-  public async getUserLoginData(email: string) {
-    return this.prisma.user.findUnique({
-      where: { email },
-      select: { email: true, password: true },
     });
   }
 }

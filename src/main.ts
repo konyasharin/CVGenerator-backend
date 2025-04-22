@@ -1,5 +1,5 @@
 import { BaseException } from '@common/exceptions';
-import { HttpExceptionFilter } from '@modules/app';
+import { HttpExceptionFilter, ResponseInterceptor } from '@modules/app';
 import { HttpStatus, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -17,6 +17,7 @@ async function bootstrap() {
   const port = process.env.PORT ?? 3000;
 
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalPipes(
     new ValidationPipe({
       exceptionFactory: (errors) => {
@@ -31,6 +32,9 @@ async function bootstrap() {
           HttpStatus.BAD_REQUEST,
         );
       },
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
     }),
   );
   app.setGlobalPrefix(apiPrefix);
